@@ -5,7 +5,7 @@ Job diario y gratuito que descarga los archivos mensuales de **Datos Abiertos de
 No usa el ticket de la API ni ningún secreto. Datos públicos de la Dirección ChileCompra.
 
 > Estado: backfill de 24 meses ejecutado (2024-10 a 2026-10, 25 archivos) y modelo generado en `data/`.
-> El workflow de GitHub Actions está escrito pero **aún no se ha ejecutado** (no hay repo publicado).
+> El workflow de GitHub Actions corrió una vez a mano (16-oct-2026, 40 s, verde) y quedó programado a diario (20:00 UTC).
 
 ## Qué se midió (histórico real, 2024-10 a 2026-10)
 
