@@ -1,0 +1,101 @@
+// Medidas DAX - Licitaciones mineras en Mercado Público
+// Crea una tabla vacía "_Medidas" (Inicio > Especificar datos, una columna cualquiera) y agrega cada medida ahí.
+// Formatos sugeridos: montos "#,0"; porcentajes "0.0%"; días "0.0".
+// Montos: solo licitaciones en pesos (CLP). Las pocas en USD o UF quedan fuera de los montos (no se convierten).
+
+// ---------- Volumen y resultado ----------
+Licitaciones = COUNTROWS ( fact_licitacion )
+
+Licitaciones adjudicadas = CALCULATE ( [Licitaciones], fact_licitacion[estado_id] = 1 )
+
+Licitaciones desiertas o revocadas = CALCULATE ( [Licitaciones], fact_licitacion[estado_id] IN { 3, 4 } )
+
+// "Cerrada" (estado_id 2) = cerró y aún no tiene resultado publicado.
+Licitaciones sin resultado = CALCULATE ( [Licitaciones], fact_licitacion[estado_id] = 2 )
+
+% adjudicación =
+DIVIDE ( [Licitaciones adjudicadas], [Licitaciones] - [Licitaciones sin resultado] )
+
+// ---------- Montos (CLP) ----------
+Monto estimado (CLP) = SUM ( fact_licitacion[monto_estimado_clp] )
+
+Monto adjudicado (CLP) = SUM ( fact_licitacion[monto_adjudicado_clp] )
+
+Monto estimado de adjudicadas (CLP) =
+CALCULATE ( [Monto estimado (CLP)], fact_licitacion[estado_id] = 1 )
+
+// Negativo = se adjudicó por debajo del monto estimado.
+Adjudicado vs estimado % =
+DIVIDE ( [Monto adjudicado (CLP)], [Monto estimado de adjudicadas (CLP)] ) - 1
+
+Monto adjudicado promedio (CLP) =
+DIVIDE ( [Monto adjudicado (CLP)], CALCULATE ( COUNTROWS ( fact_licitacion ), NOT ISBLANK ( fact_licitacion[monto_adjudicado_clp] ) ) )
+
+// ---------- Competencia y plazos ----------
+Oferentes promedio = AVERAGE ( fact_licitacion[numero_oferentes] )
+
+Días de publicación a cierre (prom.) = AVERAGE ( fact_licitacion[dias_publicacion_a_cierre] )
+
+Licitaciones con un solo oferente =
+CALCULATE ( [Licitaciones], fact_licitacion[numero_oferentes] = 1 )
+
+% con un solo oferente = DIVIDE ( [Licitaciones con un solo oferente], [Licitaciones] )
+
+// ---------- Proveedores (usar con dim_proveedor en filas) ----------
+Licitaciones en que participó =
+DISTINCTCOUNT ( fact_oferta[licitacion_id] )
+
+Licitaciones ganadas =
+CALCULATE ( DISTINCTCOUNT ( fact_oferta[licitacion_id] ), fact_oferta[seleccionada] = 1 )
+
+Tasa de éxito = DIVIDE ( [Licitaciones ganadas], [Licitaciones en que participó] )
+
+Monto ganado (CLP) =
+CALCULATE (
+    SUM ( fact_oferta[monto_adjudicado_linea] ),
+    fact_oferta[seleccionada] = 1,
+    fact_oferta[moneda_oferta] = "Peso Chileno"
+)
+
+Proveedores ganadores =
+CALCULATE ( DISTINCTCOUNT ( fact_oferta[proveedor_id] ), fact_oferta[seleccionada] = 1 )
+
+Monto top 5 proveedores (CLP) =
+SUMX ( TOPN ( 5, VALUES ( dim_proveedor[proveedor_id] ), [Monto ganado (CLP)] ), [Monto ganado (CLP)] )
+
+Concentración top 5 % =
+DIVIDE ( [Monto top 5 proveedores (CLP)], CALCULATE ( [Monto ganado (CLP)], ALL ( dim_proveedor ) ) )
+
+Ranking proveedor (por monto) =
+IF (
+    ISINSCOPE ( dim_proveedor[nombre] ),
+    RANKX ( ALL ( dim_proveedor[nombre] ), [Monto ganado (CLP)], , DESC, DENSE )
+)
+
+// ---------- Tiempo (dim_fecha marcada como tabla de fechas; relación activa = fecha de publicación) ----------
+// Ojo: la historia parte en oct-2024, así que la comparación con el año anterior solo existe desde oct-2025.
+Licitaciones año anterior = CALCULATE ( [Licitaciones], SAMEPERIODLASTYEAR ( dim_fecha[fecha] ) )
+
+Var. licitaciones vs año anterior % =
+DIVIDE ( [Licitaciones] - [Licitaciones año anterior], [Licitaciones año anterior] )
+
+Licitaciones últimos 12 meses =
+VAR fin = MAX ( fact_licitacion[fecha_publicacion] )
+RETURN
+    CALCULATE ( [Licitaciones], DATESINPERIOD ( dim_fecha[fecha], fin, -12, MONTH ) )
+
+// Mismas métricas pero por otra fecha (relaciones inactivas):
+Licitaciones por fecha de cierre =
+CALCULATE ( [Licitaciones], USERELATIONSHIP ( dim_fecha[fecha], fact_licitacion[fecha_cierre] ) )
+
+Monto adjudicado por fecha de adjudicación (CLP) =
+CALCULATE ( [Monto adjudicado (CLP)], USERELATIONSHIP ( dim_fecha[fecha], fact_licitacion[fecha_adjudicacion] ) )
+
+// ---------- Frescura de los datos (tabla meta) ----------
+Última actualización (UTC) = MAX ( meta[ejecutado_utc] )
+
+Datos hasta (publicación) = MAX ( meta[datos_hasta_publicacion] )
+
+Texto de actualización =
+"Datos hasta publicación del " & FORMAT ( [Datos hasta (publicación)], "dd-mm-yyyy" )
+    & " · actualizado " & FORMAT ( [Última actualización (UTC)], "dd-mm-yyyy hh:mm" ) & " UTC"
