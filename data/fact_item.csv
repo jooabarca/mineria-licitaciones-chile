@@ -6715,7 +6715,7 @@
 9710750,43689352,20111705,Puntas de perforación de pozo,4.0,4,34999,928692.0
 9710785,43689580,24101715,Cinta transportadora,1.0,1,27842,1789000.0
 9710785,43689585,24101715,Cinta transportadora,4.0,1,27842,504000.0
-9710825,43689842,93142001,Servicios de planificación de desarrollo urbano,1.0,2,,
+9710825,43689842,93142001,Servicios de planificación de desarrollo urbano,1.0,2,2049327,4000000.0
 9711631,43694599,81111812,Mantenimiento y soporte de hardware,2.0,13,,
 9711631,43694600,43231512,Software de gestión de licencias,1.0,13,,
 9711631,43694601,43232401,Programas de gestión de configuración,1.0,13,,
@@ -6773,3 +6773,5 @@
 9717347,43721329,52131501,Cortinas,48.0,5,,
 9717503,43721943,25101503,Automóviles,3.0,7,,
 9718130,43724718,43231512,Software de gestión de licencias,1.0,5,,
+9718421,43725930,43232306,Software de consultas e interfaz de usuario de bases de datos,24.0,9,,
+9718673,43726972,80141607,Producción de eventos,1.0,1,,
