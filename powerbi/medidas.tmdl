@@ -1,0 +1,141 @@
+createOrReplace
+
+	ref table _Medidas
+
+		measure Licitaciones = COUNTROWS(fact_licitacion)
+			formatString: #,0
+			displayFolder: "Volumen y resultado"
+
+		measure 'Licitaciones adjudicadas' = CALCULATE([Licitaciones], fact_licitacion[estado_id] = 1)
+			formatString: #,0
+			displayFolder: "Volumen y resultado"
+
+		measure 'Licitaciones desiertas o revocadas' = CALCULATE([Licitaciones], fact_licitacion[estado_id] IN {3, 4})
+			formatString: #,0
+			displayFolder: "Volumen y resultado"
+
+		/// Cerraron y aún no tienen resultado publicado (estado Cerrada).
+		measure 'Licitaciones sin resultado' = CALCULATE([Licitaciones], fact_licitacion[estado_id] = 2)
+			formatString: #,0
+			displayFolder: "Volumen y resultado"
+
+		measure '% adjudicación' = DIVIDE([Licitaciones adjudicadas], [Licitaciones] - [Licitaciones sin resultado])
+			formatString: 0.0%
+			displayFolder: "Volumen y resultado"
+
+		measure 'Monto estimado (CLP)' = SUM(fact_licitacion[monto_estimado_clp])
+			formatString: #,0
+			displayFolder: "Montos (CLP)"
+
+		measure 'Monto adjudicado (CLP)' = SUM(fact_licitacion[monto_adjudicado_clp])
+			formatString: #,0
+			displayFolder: "Montos (CLP)"
+
+		measure 'Monto estimado de adjudicadas (CLP)' = CALCULATE([Monto estimado (CLP)], fact_licitacion[estado_id] = 1)
+			formatString: #,0
+			displayFolder: "Montos (CLP)"
+
+		/// Negativo = se adjudicó por debajo del monto estimado.
+		measure 'Adjudicado vs estimado %' = DIVIDE([Monto adjudicado (CLP)], [Monto estimado de adjudicadas (CLP)]) - 1
+			formatString: 0.0%
+			displayFolder: "Montos (CLP)"
+
+		measure 'Monto adjudicado promedio (CLP)' = DIVIDE([Monto adjudicado (CLP)], CALCULATE(COUNTROWS(fact_licitacion), NOT ISBLANK(fact_licitacion[monto_adjudicado_clp])))
+			formatString: #,0
+			displayFolder: "Montos (CLP)"
+
+		measure 'Oferentes promedio' = AVERAGE(fact_licitacion[numero_oferentes])
+			formatString: 0.0
+			displayFolder: "Competencia y plazos"
+
+		measure 'Días de publicación a cierre (prom.)' = AVERAGE(fact_licitacion[dias_publicacion_a_cierre])
+			formatString: 0.0
+			displayFolder: "Competencia y plazos"
+
+		measure 'Licitaciones con un solo oferente' = CALCULATE([Licitaciones], fact_licitacion[numero_oferentes] = 1)
+			formatString: #,0
+			displayFolder: "Competencia y plazos"
+
+		measure '% con un solo oferente' = DIVIDE([Licitaciones con un solo oferente], [Licitaciones])
+			formatString: 0.0%
+			displayFolder: "Competencia y plazos"
+
+		measure 'Licitaciones en que participó' = DISTINCTCOUNT(fact_oferta[licitacion_id])
+			formatString: #,0
+			displayFolder: "Proveedores"
+
+		measure 'Licitaciones ganadas' = CALCULATE(DISTINCTCOUNT(fact_oferta[licitacion_id]), fact_oferta[seleccionada] = 1)
+			formatString: #,0
+			displayFolder: "Proveedores"
+
+		measure 'Tasa de éxito' = DIVIDE([Licitaciones ganadas], [Licitaciones en que participó])
+			formatString: 0.0%
+			displayFolder: "Proveedores"
+
+		measure 'Monto ganado (CLP)' =
+				CALCULATE(
+				    SUM(fact_oferta[monto_adjudicado_linea]),
+				    fact_oferta[seleccionada] = 1,
+				    fact_oferta[moneda_oferta] = "Peso Chileno"
+				)
+			formatString: #,0
+			displayFolder: "Proveedores"
+
+		measure 'Proveedores ganadores' = CALCULATE(DISTINCTCOUNT(fact_oferta[proveedor_id]), fact_oferta[seleccionada] = 1)
+			formatString: #,0
+			displayFolder: "Proveedores"
+
+		measure 'Monto top 5 proveedores (CLP)' = SUMX(TOPN(5, VALUES(dim_proveedor[proveedor_id]), [Monto ganado (CLP)]), [Monto ganado (CLP)])
+			formatString: #,0
+			displayFolder: "Proveedores"
+
+		measure 'Concentración top 5 %' = DIVIDE([Monto top 5 proveedores (CLP)], CALCULATE([Monto ganado (CLP)], ALL(dim_proveedor)))
+			formatString: 0.0%
+			displayFolder: "Proveedores"
+
+		measure 'Ranking proveedor (por monto)' =
+				IF(
+				    ISINSCOPE(dim_proveedor[nombre]),
+				    RANKX(ALL(dim_proveedor[nombre]), [Monto ganado (CLP)], , DESC, DENSE)
+				)
+			formatString: 0
+			displayFolder: "Proveedores"
+
+		/// La historia parte en oct-2024: la comparación solo existe desde oct-2025.
+		measure 'Licitaciones año anterior' = CALCULATE([Licitaciones], SAMEPERIODLASTYEAR(dim_fecha[fecha]))
+			formatString: #,0
+			displayFolder: "Tiempo"
+
+		measure 'Var. licitaciones vs año anterior %' = DIVIDE([Licitaciones] - [Licitaciones año anterior], [Licitaciones año anterior])
+			formatString: 0.0%
+			displayFolder: "Tiempo"
+
+		measure 'Licitaciones últimos 12 meses' =
+				VAR fin = MAX(fact_licitacion[fecha_publicacion])
+				RETURN
+				    CALCULATE([Licitaciones], DATESINPERIOD(dim_fecha[fecha], fin, -12, MONTH))
+			formatString: #,0
+			displayFolder: "Tiempo"
+
+		/// Usa la relación inactiva con fecha_cierre.
+		measure 'Licitaciones por fecha de cierre' = CALCULATE([Licitaciones], USERELATIONSHIP(dim_fecha[fecha], fact_licitacion[fecha_cierre]))
+			formatString: #,0
+			displayFolder: "Tiempo"
+
+		/// Usa la relación inactiva con fecha_adjudicacion.
+		measure 'Monto adjudicado por fecha de adjudicación (CLP)' = CALCULATE([Monto adjudicado (CLP)], USERELATIONSHIP(dim_fecha[fecha], fact_licitacion[fecha_adjudicacion]))
+			formatString: #,0
+			displayFolder: "Tiempo"
+
+		measure 'Última actualización (UTC)' = MAX(meta[ejecutado_utc])
+			formatString: dd-mm-yyyy hh:mm
+			displayFolder: "Frescura de datos"
+
+		measure 'Datos hasta (publicación)' = MAX(meta[datos_hasta_publicacion])
+			formatString: dd-mm-yyyy
+			displayFolder: "Frescura de datos"
+
+		measure 'Texto de actualización' =
+				"Datos hasta publicación del " & FORMAT([Datos hasta (publicación)], "dd-mm-yyyy")
+				    & " · actualizado " & FORMAT([Última actualización (UTC)], "dd-mm-yyyy hh:mm") & " UTC"
+			displayFolder: "Frescura de datos"
