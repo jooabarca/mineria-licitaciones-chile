@@ -71,7 +71,7 @@ COLS = ["Codigo", "CodigoExterno", "Nombre", "Descripcion", "Tipo", "Tipo de Adq
         "FechaEnvioOferta", "Oferta seleccionada"]
 
 CATEGORIA_CORTA = {
-    "Maquinaria de minería y perforación (UNSPSC)": "Maquinaria",
+    "Maquinaria de minería y perforación (UNSPSC)": "Maquinaria y vehículos",
     "Insumos y servicios mineros (palabras clave)": "Insumos",
     "Compra administrativa de organismo del sector": "Administrativa",
 }
