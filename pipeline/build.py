@@ -70,6 +70,12 @@ COLS = ["Codigo", "CodigoExterno", "Nombre", "Descripcion", "Tipo", "Tipo de Adq
         "MontoUnitarioOferta", "Valor Total Ofertado", "CantidadAdjudicada", "MontoLineaAdjudica",
         "FechaEnvioOferta", "Oferta seleccionada"]
 
+CATEGORIA_CORTA = {
+    "Maquinaria de minería y perforación (UNSPSC)": "Maquinaria",
+    "Insumos y servicios mineros (palabras clave)": "Insumos",
+    "Compra administrativa de organismo del sector": "Administrativa",
+}
+
 REGIONES = [  # id, nombre corto, fragmento normalizado que lo identifica
     (1, "Arica y Parinacota", "ARICA"), (2, "Tarapacá", "TARAPACA"), (3, "Antofagasta", "ANTOFAGASTA"),
     (4, "Atacama", "ATACAMA"), (5, "Coquimbo", "COQUIMBO"), (6, "Valparaíso", "VALPARAISO"),
@@ -295,6 +301,7 @@ def construir_modelo(df):
             return "Insumos y servicios mineros (palabras clave)"
         return "Compra administrativa de organismo del sector"
     lic["categoria_relevancia"] = lic["licitacion_id"].map(flags.apply(_categoria, axis=1))
+    lic["categoria_corta"] = lic["categoria_relevancia"].map(CATEGORIA_CORTA).fillna("Otra")   # etiqueta corta para gráficos
     clp = lic["moneda"].eq("CLP")
     lic["monto_estimado_clp"] = lic["monto_estimado"].where(clp)
     lic["monto_adjudicado_clp"] = lic["monto_adjudicado"].where(clp)

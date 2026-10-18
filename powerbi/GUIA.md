@@ -51,8 +51,8 @@ Solo licitaciones cerradas con ofertas; no incluye abiertas."
 
 **Página 1 · Resumen**
 - Fila de tarjetas: Licitaciones, Monto adjudicado (CLP), % adjudicación, Oferentes promedio, Proveedores ganadores.
-- Columnas por mes de publicación (`dim_fecha[anio_mes]`) con `[Licitaciones]`, apiladas por `categoria_relevancia`.
-- Barras de `[Monto adjudicado (CLP)]` por `categoria_relevancia`.
+- Columnas por mes de publicación (`dim_fecha[anio_mes]`, ordenado ascendente) con `[Licitaciones]`, apiladas por `categoria_corta` (Maquinaria / Insumos / Administrativa; `categoria_relevancia` es el nombre largo).
+- Barras de `[Monto adjudicado (CLP)]` por `categoria_corta`.
 - Segmentadores: año, región, categoría de relevancia, estado.
 
 **Página 2 · Quién compra y dónde**

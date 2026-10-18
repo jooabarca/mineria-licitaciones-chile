@@ -140,6 +140,7 @@ let
         {"n_items", Int64.Type},
         {"motivo_filtro", type text},
         {"categoria_relevancia", type text},
+        {"categoria_corta", type text},
         {"monto_estimado_clp", type number},
         {"monto_adjudicado_clp", type number},
         {"dias_publicacion_a_cierre", Int64.Type},

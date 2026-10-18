@@ -51,7 +51,7 @@ maquinaria). Palabras descartadas por falsos positivos: faena (asfalto), chancad
 
 | Tabla | Grano |
 |---|---|
-| `fact_licitacion` | 1 fila por licitación (montos en CLP solo si la moneda es CLP; `categoria_relevancia`, `motivo_filtro`) |
+| `fact_licitacion` | 1 fila por licitación (montos en CLP solo si la moneda es CLP; `categoria_relevancia` larga y `categoria_corta`: Maquinaria / Insumos / Administrativa, `motivo_filtro`) |
 | `fact_item` | licitación × ítem (UNSPSC, cantidad, monto adjudicado, proveedor adjudicado) |
 | `fact_oferta` | licitación × ítem × oferente (`seleccionada` 0/1) |
 | `dim_organismo`, `dim_region`, `dim_unspsc`, `dim_proveedor`, `dim_estado`, `dim_fecha` | dimensiones |
