@@ -10788,9 +10788,9 @@
 9710785,43689580,24101715,Cinta transportadora,1.0,1,27842,1789000.0
 9710785,43689585,24101715,Cinta transportadora,4.0,1,27842,504000.0
 9710825,43689842,93142001,Servicios de planificación de desarrollo urbano,1.0,2,2049327,4000000.0
-9711631,43694599,81111812,Mantenimiento y soporte de hardware,2.0,13,,
-9711631,43694600,43231512,Software de gestión de licencias,1.0,13,,
-9711631,43694601,43232401,Programas de gestión de configuración,1.0,13,,
+9711631,43694599,81111812,Mantenimiento y soporte de hardware,2.0,13,1704561,6720662.8
+9711631,43694600,43231512,Software de gestión de licencias,1.0,13,1704561,21619693.0
+9711631,43694601,43232401,Programas de gestión de configuración,1.0,13,1704561,7366857.0
 9711820,43696173,20101501,Equipo de minería continua,1.0,3,,
 9711820,43696174,20101501,Equipo de minería continua,1.0,2,,
 9711820,43696175,20101501,Equipo de minería continua,1.0,4,,
@@ -10806,7 +10806,7 @@
 9712455,43699421,25172504,Neumáticos para camionetas o automóviles,73.0,10,,
 9712517,43699806,78111804,Servicios de taxi,1.0,3,,
 9712520,43699810,43211507,Computadores de escritorio,1.0,3,,
-9713087,43702533,25201604,Sistemas de guiar al avión,1.0,4,,
+9713087,43702533,25201604,Sistemas de guiar al avión,1.0,4,35546,8174587.0
 9714011,43706758,20111601,Maquinaria de perforación o excavación,1.0,2,,
 9714208,43707615,20111601,Maquinaria de perforación o excavación,1.0,5,,
 9714208,43707628,20111601,Maquinaria de perforación o excavación,1.0,5,,
@@ -11008,8 +11008,20 @@
 9717434,43721811,41115807,Analizadores químicos,1.0,2,,
 9717503,43721943,25101503,Automóviles,3.0,7,,
 9718130,43724718,43231512,Software de gestión de licencias,1.0,5,,
-9718421,43725930,43232306,Software de consultas e interfaz de usuario de bases de datos,24.0,9,,
+9718421,43725930,43232306,Software de consultas e interfaz de usuario de bases de datos,24.0,9,1879858,5399760.0
 9718620,43726762,26111701,Baterías recargables,130.0,6,,
 9718620,43726763,26111701,Baterías recargables,40.0,6,,
 9718673,43726972,80141607,Producción de eventos,1.0,1,,
 9718705,43727099,43231512,Software de gestión de licencias,50.0,1,,
+9720012,43734472,31181604,Sello mecánico,1.0,4,,
+9720012,43734473,31181604,Sello mecánico,1.0,4,,
+9720012,43734474,31162001,Puntas,5.0,4,,
+9720012,43734475,31162001,Puntas,5.0,4,,
+9720012,43734476,24101715,Cinta transportadora,4.0,2,,
+9720012,43734480,24101715,Cinta transportadora,4.0,2,,
+9720012,43734481,24101715,Cinta transportadora,4.0,2,,
+9720012,43734488,24101715,Cinta transportadora,4.0,2,,
+9720012,43734490,24101715,Cinta transportadora,4.0,2,,
+9720012,43734491,24101715,Cinta transportadora,4.0,2,,
+9720012,43734492,24101715,Cinta transportadora,4.0,2,,
+9720012,43734502,24101715,Cinta transportadora,4.0,2,,
