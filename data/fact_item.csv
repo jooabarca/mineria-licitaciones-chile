@@ -10762,9 +10762,9 @@
 9707960,43677222,76111501,Servicios de limpieza de edificios,1.0,6,1639119,7213200.0
 9708439,43678627,46191603,Mangueras o boquillas contra incendios,1.0,3,1955592,1680000.0
 9709017,43681060,82121503,Impresión digital,1.0,3,1412769,9860959.0
-9709186,43682346,76111501,Servicios de limpieza de edificios,1.0,5,1162040,550000.0
+9709186,43682346,76111501,Servicios de limpieza de edificios,1.0,5,,
 9709376,43683268,41121815,Adaptadores o conectores de laboratorio o accesorios,1.0,1,71204,4982700.0
-9709489,43684071,81112006,Servicios de almacenamiento de datos,36.0,1,,
+9709489,43684071,81112006,Servicios de almacenamiento de datos,36.0,1,1038400,374413915.8
 9709583,43684370,76111501,Servicios de limpieza de edificios,1.0,1,1597409,10373400.0
 9710303,43687682,22101702,Cucharas de movimiento de tierra o sus piezas o accesorios,6.0,1,27842,566496.0
 9710303,43687687,22101702,Cucharas de movimiento de tierra o sus piezas o accesorios,108.0,1,27842,30024.0
@@ -10791,21 +10791,21 @@
 9711631,43694599,81111812,Mantenimiento y soporte de hardware,2.0,13,1704561,6720662.8
 9711631,43694600,43231512,Software de gestión de licencias,1.0,13,1704561,21619693.0
 9711631,43694601,43232401,Programas de gestión de configuración,1.0,13,1704561,7366857.0
-9711820,43696173,20101501,Equipo de minería continua,1.0,3,,
-9711820,43696174,20101501,Equipo de minería continua,1.0,2,,
+9711820,43696173,20101501,Equipo de minería continua,1.0,3,253984,6467000.0
+9711820,43696174,20101501,Equipo de minería continua,1.0,2,253984,9590000.0
 9711820,43696175,20101501,Equipo de minería continua,1.0,4,,
-9711820,43696176,20101501,Equipo de minería continua,1.0,3,,
-9711820,43696177,20101501,Equipo de minería continua,1.0,2,,
-9711820,43696178,20101501,Equipo de minería continua,2.0,2,,
-9711820,43696179,20101501,Equipo de minería continua,1.0,2,,
-9711932,43696875,43211601,Cajas de conmutación de computadores,1.0,1,,
+9711820,43696176,20101501,Equipo de minería continua,1.0,3,253984,4945000.0
+9711820,43696177,20101501,Equipo de minería continua,1.0,2,253984,2990000.0
+9711820,43696178,20101501,Equipo de minería continua,2.0,2,253984,3360000.0
+9711820,43696179,20101501,Equipo de minería continua,1.0,2,71204,10980000.0
+9711932,43696875,43211601,Cajas de conmutación de computadores,1.0,1,62706,176470588.0
 9712123,43698106,20111601,Maquinaria de perforación o excavación,1.0,3,,
 9712302,43698841,80101506,Asesorías en diseño organizacional,1.0,2,,
-9712362,43698938,43232408,Software de desarrollo de plataforma Web,1.0,11,,
+9712362,43698938,43232408,Software de desarrollo de plataforma Web,1.0,11,1550916,105000000.0
 9712455,43699420,25172504,Neumáticos para camionetas o automóviles,118.0,10,,
 9712455,43699421,25172504,Neumáticos para camionetas o automóviles,73.0,10,,
 9712517,43699806,78111804,Servicios de taxi,1.0,3,,
-9712520,43699810,43211507,Computadores de escritorio,1.0,3,,
+9712520,43699810,43211507,Computadores de escritorio,1.0,3,1717040,44048159.0
 9713087,43702533,25201604,Sistemas de guiar al avión,1.0,4,35546,8174587.0
 9714011,43706758,20111601,Maquinaria de perforación o excavación,1.0,2,,
 9714208,43707615,20111601,Maquinaria de perforación o excavación,1.0,5,,
@@ -10813,7 +10813,7 @@
 9714208,43722620,20111601,Maquinaria de perforación o excavación,1.0,4,,
 9714208,43722621,24101510,Camión volcador,1.0,3,,
 9715271,43712059,20102305,Vehículos de servicio,3.0,10,,
-9715665,43714023,76111501,Servicios de limpieza de edificios,24.0,5,,
+9715665,43714023,76111501,Servicios de limpieza de edificios,24.0,5,1986503,12878400.0
 9715797,43714577,81101701,Ingeniería eléctrica,1.0,10,,
 9715885,43714940,41106608,Vectores de fusión,1.0,1,46539,3250000.0
 9716148,43715940,72101607,Instalación o reparación de paredes,1.0,3,1576711,4250000.0
