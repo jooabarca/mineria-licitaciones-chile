@@ -11032,7 +11032,7 @@
 9720012,43734492,24101715,Cinta transportadora,4.0,2,27842,10165092.0
 9720012,43734502,24101715,Cinta transportadora,4.0,2,27842,1664.0
 9721083,43736964,25131705,Aviones objetivo o de reconocimiento,1.0,2,,
-9721154,43737609,72101607,Instalación o reparación de paredes,1.0,4,,
+9721154,43737609,72101607,Instalación o reparación de paredes,1.0,4,1352991,21099414.0
 9721234,43738214,43211501,Servidores,1.0,1,,
 9721363,43738753,72131702,Construcción de obras civiles,1.0,7,,
 9721617,43739904,76111501,Servicios de limpieza de edificios,1.0,2,,
@@ -11043,6 +11043,7 @@
 9724036,43751488,71101501,Desarrollo de minería,1.0,1,,
 9724825,43754734,72101601,Instalación o reparación de techos,1.0,8,,
 9725255,43756100,23153502,Reparación de zona de pintura,1.0,8,,
+9725454,43756869,72101607,Instalación o reparación de paredes,1.0,3,,
 9725485,43757709,55101524,Libros de referencias para bibliotecas,1.0,5,,
 9725485,43757711,55101524,Libros de referencias para bibliotecas,1.0,5,,
 9725485,43757714,55101524,Libros de referencias para bibliotecas,1.0,6,,
@@ -11084,6 +11085,10 @@
 9725485,43758194,55101524,Libros de referencias para bibliotecas,1.0,6,,
 9725485,43758196,55101524,Libros de referencias para bibliotecas,1.0,5,,
 9725485,43758208,55101524,Libros de referencias para bibliotecas,1.0,1,,
+9725841,43758428,20101710,Maquinaria de pulverización,1.0,1,,
+9726015,43760042,24111810,Tanques de almacenamiento de agua,1.0,3,,
+9726470,43760822,20111601,Maquinaria de perforación o excavación,1.0,1,,
+9728133,43769534,20111601,Maquinaria de perforación o excavación,1.0,1,,
 9728146,43769581,41113642,Comprobador de circuitos,2.0,2,,
 9728146,43769582,46171501,Candados,100.0,2,,
 9728146,43769583,72102209,Arrastre de cables,1.0,2,,
