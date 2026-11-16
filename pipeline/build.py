@@ -70,6 +70,15 @@ COLS = ["Codigo", "CodigoExterno", "Nombre", "Descripcion", "Tipo", "Tipo de Adq
         "MontoUnitarioOferta", "Valor Total Ofertado", "CantidadAdjudicada", "MontoLineaAdjudica",
         "FechaEnvioOferta", "Oferta seleccionada"]
 
+TAMANO_COMPRA = {  # código de tipo de licitación -> (tamaño, orden). Tramos en UTM (1 UTM ~ 68.000 CLP)
+    "L1": ("Pequeña", 1),       # pública < 100 UTM
+    "LE": ("Mediana", 2),       # pública 100-1.000 UTM
+    "LP": ("Grande", 3),        # pública > 1.000 UTM
+    "LQ": ("Grande", 3),        # pública 2.000-5.000 UTM
+    "LR": ("Muy grande", 4),    # pública > 5.000 UTM
+    "E2": ("Privada", 5), "CO": ("Privada", 5), "B2": ("Privada", 5), "H2": ("Privada", 5), "I2": ("Privada", 5),
+}
+
 CATEGORIA_CORTA = {
     "Maquinaria de minería y perforación (UNSPSC)": "Maquinaria y vehículos",
     "Insumos y servicios mineros (palabras clave)": "Insumos",
@@ -386,6 +395,8 @@ def construir_modelo(df):
         return "Compra administrativa de organismo del sector"
     lic["categoria_relevancia"] = lic["licitacion_id"].map(flags.apply(_categoria, axis=1))
     lic["categoria_corta"] = lic["categoria_relevancia"].map(CATEGORIA_CORTA).fillna("Otra")   # etiqueta corta para gráficos
+    lic["tamano_compra"] = lic["tipo"].map(lambda t: TAMANO_COMPRA.get(t, ("Otra", 6))[0])        # L1/LE/LP... a tamaño legible
+    lic["tamano_compra_orden"] = lic["tipo"].map(lambda t: TAMANO_COMPRA.get(t, ("Otra", 6))[1])    # para ordenar de menor a mayor
     clp = lic["moneda"].eq("CLP")
     lic["monto_estimado_clp"] = lic["monto_estimado"].where(clp)
     lic["monto_adjudicado_clp"] = lic["monto_adjudicado"].where(clp)
