@@ -243,6 +243,7 @@ def construir_modelo(df):
            .agg(organismo=("NombreOrganismo", "last"), sector=("sector", "last")).reset_index()
            .rename(columns={"CodigoOrganismo": "organismo_id"}))
     org["organismo_id"] = pd.to_numeric(org["organismo_id"]).astype("Int64")
+    org["sector"] = org["sector"].fillna("").str.strip().replace("", "Sin clasificar")   # la fuente deja vacío el sector de organismos nuevos (p. ej. SLEP)
     org["organismo"] = org["organismo"].str.strip()
 
     # --- dim_proveedor (sin RUT; personas naturales enmascaradas)
