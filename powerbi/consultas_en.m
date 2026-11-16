@@ -53,6 +53,7 @@ let
     ChangedTypes = Table.TransformColumnTypes(RenamedFirstColumn, {
         {"organismo_id", Int64.Type},
         {"organismo", type text},
+        {"organismo_corto", type text},
         {"sector", type text}
     }, "en-US")
 in

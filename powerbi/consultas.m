@@ -55,6 +55,7 @@ let
     Tipos = Table.TransformColumnTypes(PrimeraColumna, {
         {"organismo_id", Int64.Type},
         {"organismo", type text},
+        {"organismo_corto", type text},
         {"sector", type text}
     }, "en-US")
 in

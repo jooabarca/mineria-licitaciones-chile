@@ -200,6 +200,76 @@ def procesar_mes(y, m, cache, usar_cache):
     return True
 
 
+
+# ------------------------------------------------------------------ nombre corto de organismos
+SIGLAS = [  # (patrón sobre el nombre sin tildes y en mayúsculas, etiqueta)
+    (r"GEOLOGIA Y MINERIA", "Sernageomin"),
+    (r"SUBSECRETARIA DEL MINISTERIO DE MINERIA|SUBSECRETARIA DE MINERIA", "Subsecretaría de Minería"),
+    (r"COCHILCO|COMISION CHILENA DEL COBRE", "Cochilco"),
+    (r"COMISION CHILENA DE ENERGIA NUCLEAR", "Com. Chilena de Energía Nuclear"),
+    (r"^MINISTERIO DE OBRAS PUBLICAS", "MOP – Obras Públicas"),
+    (r"DIVISION LOGISTICA DEL EJERCITO", "Ejército – Div. Logística"),
+    (r"ABASTECIMIENTO DE LA ARMADA", "Armada – Abastecimiento"),
+    (r"FUERZA AEREA DE CHILE", "FACh – Comando Logístico"),
+    (r"LOGISTICA DE CARABINEROS", "Carabineros – Logística"),
+    (r"GENDARMERIA", "Gendarmería"),
+    (r"POLICIA DE INVESTIGACIONES", "PDI"),
+    (r"EMPRESA DE TRANSPORTE DE PASAJEROS METRO", "Metro de Santiago"),
+    (r"^CORP NACIONAL FORESTAL", "CONAF"),
+    (r"^INSTITUTO DE SEGURIDAD LABORAL", "ISL"),
+    (r"^SERVICIO AGRICOLA Y GANADERO", "SAG"),
+    (r"^CORPORACION DE FOMENTO DE LA PRODUCCION", "CORFO"),
+    (r"^SERVICIO NACIONAL DE ADUANAS", "Aduanas"),
+    (r"^JUNTA NACIONAL DE JARDINES", "JUNJI"),
+    (r"^DIRECCION GENERAL DE AERONAUTICA CIVIL", "DGAC"),
+]
+MINUSCULAS = {"de", "del", "la", "las", "los", "y", "e", "en", "para", "el"}
+
+
+TILDES = {"Maria": "María", "Angeles": "Ángeles", "Vina": "Viña", "Penalolen": "Peñalolén", "Nunoa": "Ñuñoa",
+          "Chanaral": "Chañaral", "Concepcion": "Concepción", "Valparaiso": "Valparaíso", "Rio": "Río",
+          "Hualane": "Hualañé", "Conchali": "Conchalí", "Quilpue": "Quilpué", "Maipu": "Maipú", "Ohiggins": "O'Higgins",
+          "O'higgins": "O'Higgins", "Panguipulli": "Panguipulli", "Ancud": "Ancud", "Canete": "Cañete"}
+
+
+def _titulo(txt, inicio=True):
+    out = []
+    for i, w in enumerate(txt.split()):
+        w = w.lower() if (w.lower() in MINUSCULAS and (i > 0 or not inicio)) else w[:1].upper() + w[1:].lower()
+        out.append(TILDES.get(w, w))
+    return " ".join(out)
+
+
+def organismo_corto(nombre):
+    """Etiqueta corta y legible para gráficos (los nombres de origen vienen en mayúsculas y truncados)."""
+    if not isinstance(nombre, str) or not nombre.strip():
+        return "Sin nombre"
+    limpio = re.sub(r"\s+", " ", nombre).strip()
+    clave = (unicodedata.normalize("NFKD", limpio.upper()).encode("ascii", "ignore").decode("ascii"))
+    for patron, etiqueta in SIGLAS:
+        if re.search(patron, clave):
+            return etiqueta
+    m = re.match(r"^(?:I\.?|ILUSTRE)\s*(?:MUNICIPALIDAD|MINICIPALIDAD)\s*(?:DE\s+)?(.+)$", clave)
+    if m:
+        return "Muni. de " + _titulo(m.group(1), inicio=False)
+    m = re.match(r"^MUNICIPALIDAD (?:DE )?(.+)$", clave)
+    if m:
+        return "Muni. de " + _titulo(m.group(1), inicio=False)
+    m = re.match(r"^SERVICIO LOCAL DE EDUCACION(?: PUBLICA)? (.+)$", clave)
+    if m:
+        return "SLEP " + _titulo(m.group(1), inicio=False)
+    m = re.match(r"^SERVICIO (?:DE )?SALUD (.+)$", clave)
+    if m:
+        return "Serv. Salud " + _titulo(m.group(1), inicio=False)
+    m = re.match(r"^UNIVERSIDAD (.+)$", clave)
+    if m:
+        return "U. " + _titulo(m.group(1), inicio=False)
+    corto = _titulo(limpio) if limpio.isupper() else limpio
+    for largo, abrev in [("Subsecretaría", "Subsec."), ("Subsecretaria", "Subsec."), ("Dirección", "Dir."), ("Direccion", "Dir."),
+                         ("Corporación", "Corp."), ("Corporacion", "Corp."), ("Corp ", "Corp. "), ("Servicio", "Serv.")]:
+        corto = corto.replace(largo, abrev)
+    return corto if len(corto) <= 42 else corto[:41].rstrip() + "…"
+
 # ------------------------------------------------------------------ consolidación / modelo
 def cargar_rebanadas():
     archivos = sorted(SLICES.glob("*.csv.gz"))
@@ -245,6 +315,7 @@ def construir_modelo(df):
     org["organismo_id"] = pd.to_numeric(org["organismo_id"]).astype("Int64")
     org["sector"] = org["sector"].fillna("").str.strip().replace("", "Sin clasificar")   # la fuente deja vacío el sector de organismos nuevos (p. ej. SLEP)
     org["organismo"] = org["organismo"].str.strip()
+    org["organismo_corto"] = org["organismo"].map(organismo_corto)
 
     # --- dim_proveedor (sin RUT; personas naturales enmascaradas)
     pr = (df.dropna(subset=["proveedor_id"]).sort_values("FechaPublicacion").groupby("proveedor_id")
