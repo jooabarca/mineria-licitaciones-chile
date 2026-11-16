@@ -357,8 +357,11 @@ def construir_modelo(df):
     mask = pr["persona_natural"].eq(1)
     if PUBLICAR_NOMBRES_PERSONAS:
         # las personas vienen en MAYÚSCULAS ("JUAN PEREZ GONZALEZ"): se dejan en formato de nombre propio
+        # y se prefiere la razón social, que trae las tildes ("Zúñiga Rodríguez") que el nombre comercial no
         for c in ("nombre", "razon_social"):
             pr.loc[mask, c] = pr.loc[mask, c].fillna("").map(_nombre_persona)
+        usar = mask & pr["razon_social"].astype(str).str.strip().ne("")
+        pr.loc[usar, "nombre"] = pr.loc[usar, "razon_social"]
     else:
         pr.loc[mask, "nombre"] = "Persona natural " + pr.loc[mask, "proveedor_id"].astype(str)
         pr.loc[mask, "razon_social"] = pr.loc[mask, "nombre"]
