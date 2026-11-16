@@ -71,12 +71,13 @@ COLS = ["Codigo", "CodigoExterno", "Nombre", "Descripcion", "Tipo", "Tipo de Adq
         "FechaEnvioOferta", "Oferta seleccionada"]
 
 TAMANO_COMPRA = {  # código de tipo de licitación -> (tamaño, orden). Tramos en UTM (1 UTM ~ 68.000 CLP)
-    "L1": ("Pequeña", 1),       # pública < 100 UTM
-    "LE": ("Mediana", 2),       # pública 100-1.000 UTM
-    "LP": ("Grande", 3),        # pública > 1.000 UTM
-    "LQ": ("Grande", 3),        # pública 2.000-5.000 UTM
-    "LR": ("Muy grande", 4),    # pública > 5.000 UTM
-    "E2": ("Privada", 5), "CO": ("Privada", 5), "B2": ("Privada", 5), "H2": ("Privada", 5), "I2": ("Privada", 5),
+    "L1": ("Pequeña (L1)", 1),       # pública < 100 UTM
+    "LE": ("Mediana (LE)", 2),       # pública 100-1.000 UTM
+    "LP": ("Grande (LP, LQ)", 3),        # pública > 1.000 UTM
+    "LQ": ("Grande (LP, LQ)", 3),        # pública 2.000-5.000 UTM
+    "LR": ("Muy grande (LR)", 4),    # pública > 5.000 UTM
+    "E2": ("Privada (E2, CO, B2, H2, I2)", 5), "CO": ("Privada (E2, CO, B2, H2, I2)", 5), "B2": ("Privada (E2, CO, B2, H2, I2)", 5),
+    "H2": ("Privada (E2, CO, B2, H2, I2)", 5), "I2": ("Privada (E2, CO, B2, H2, I2)", 5),
 }
 
 CATEGORIA_CORTA = {
