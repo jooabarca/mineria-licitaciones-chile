@@ -16,8 +16,9 @@ Modos
   python pipeline/build.py --usar-cache --cache <carpeta con AAAA-M.zip>   # sin red
 
 Solo usa biblioteca estándar + pandas. No usa ningún secreto.
-Datos fuente: públicos (Dirección ChileCompra). Se omiten RUT y se enmascaran
-proveedores que son personas naturales.
+Datos fuente: públicos (Dirección ChileCompra). El RUT nunca se publica. Los nombres de
+proveedores que son personas naturales se publican tal como están en Mercado Público
+(PUBLICAR_NOMBRES_PERSONAS = False los enmascara como "Persona natural N").
 """
 import argparse
 import codecs
@@ -40,6 +41,10 @@ RAIZ = Path(__file__).resolve().parent.parent
 DATA = RAIZ / "data"
 SLICES = DATA / "slices"
 MESES_DIARIO = 3                       # mes actual + 2 previos (las adjudicaciones siguen cambiando)
+# Los nombres de los proveedores son información pública de Mercado Público. True = se publican los de
+# personas naturales (sin RUT); False = salen como "Persona natural N". Cambiarlo exige un backfill completo,
+# porque las rebanadas guardan el nombre tal como se escribió en su momento.
+PUBLICAR_NOMBRES_PERSONAS = True
 MESES_ES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
             "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
@@ -205,10 +210,11 @@ def procesar_mes(y, m, cache, usar_cache):
     rut = pd.to_numeric(df["RutProveedor"].fillna("").str.replace(".", "", regex=False).str.split("-").str[0],
                         errors="coerce")
     df["persona_natural"] = (rut < 50_000_000).astype("Int8")
-    pn = df["persona_natural"].eq(1)
-    etiqueta = "Persona natural " + df["CodigoProveedor"].fillna("s/c")
-    df.loc[pn, "NombreProveedor"] = etiqueta[pn]            # los nombres de personas no se guardan ni publican
-    df.loc[pn, "RazonSocialProveedor"] = etiqueta[pn]
+    if not PUBLICAR_NOMBRES_PERSONAS:
+        pn = df["persona_natural"].eq(1)
+        etiqueta = "Persona natural " + df["CodigoProveedor"].fillna("s/c")
+        df.loc[pn, "NombreProveedor"] = etiqueta[pn]
+        df.loc[pn, "RazonSocialProveedor"] = etiqueta[pn]
     out = aplicar_filtro(df).drop(columns=["RutProveedor"])
     out["mes_archivo"] = f"{y}-{int(m):02d}"
     SLICES.mkdir(parents=True, exist_ok=True)
@@ -257,6 +263,11 @@ def _titulo(txt, inicio=True):
         w = w.lower() if (w.lower() in MINUSCULAS and (i > 0 or not inicio)) else w[:1].upper() + w[1:].lower()
         out.append(TILDES.get(w, w))
     return " ".join(out)
+
+
+def _nombre_persona(txt):
+    """'JUAN PEREZ GONZALEZ' -> 'Juan Perez Gonzalez' (sin inventar tildes que la fuente no trae)."""
+    return _titulo(txt, inicio=True) if isinstance(txt, str) and txt.strip() else txt
 
 
 def organismo_corto(nombre):
@@ -339,13 +350,18 @@ def construir_modelo(df):
     org["organismo"] = org["organismo"].str.strip()
     org["organismo_corto"] = org["organismo"].map(organismo_corto)
 
-    # --- dim_proveedor (sin RUT; personas naturales enmascaradas)
+    # --- dim_proveedor (sin RUT)
     pr = (df.dropna(subset=["proveedor_id"]).sort_values("FechaPublicacion").groupby("proveedor_id")
           .agg(nombre=("NombreProveedor", "last"), razon_social=("RazonSocialProveedor", "last"),
                persona_natural=("persona_natural", "max")).reset_index())
     mask = pr["persona_natural"].eq(1)
-    pr.loc[mask, "nombre"] = "Persona natural " + pr.loc[mask, "proveedor_id"].astype(str)
-    pr.loc[mask, "razon_social"] = pr.loc[mask, "nombre"]
+    if PUBLICAR_NOMBRES_PERSONAS:
+        # las personas vienen en MAYÚSCULAS ("JUAN PEREZ GONZALEZ"): se dejan en formato de nombre propio
+        for c in ("nombre", "razon_social"):
+            pr.loc[mask, c] = pr.loc[mask, c].fillna("").map(_nombre_persona)
+    else:
+        pr.loc[mask, "nombre"] = "Persona natural " + pr.loc[mask, "proveedor_id"].astype(str)
+        pr.loc[mask, "razon_social"] = pr.loc[mask, "nombre"]
     pr["tipo_proveedor"] = mask.map({True: "Persona natural", False: "Empresa"})
     dim_proveedor = pr.drop(columns=["persona_natural"])
 

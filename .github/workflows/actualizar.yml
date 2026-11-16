@@ -6,9 +6,13 @@ on:
   workflow_dispatch:
     inputs:
       backfill:
-        description: "Re-descargar los 24 meses completos (histórico)"
+        description: "Re-descargar todos los meses desde la fecha de abajo (histórico)"
         type: boolean
         default: false
+      desde:
+        description: "Mes de inicio del backfill (AAAA-MM)"
+        type: string
+        default: "2024-01"
 
 permissions:
   contents: write
@@ -34,7 +38,7 @@ jobs:
       - name: Descargar, filtrar y consolidar
         run: |
           if [ "${{ inputs.backfill }}" = "true" ]; then
-            python pipeline/build.py --backfill
+            python pipeline/build.py --backfill --desde "${{ inputs.desde }}"
           else
             python pipeline/build.py
           fi

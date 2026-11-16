@@ -62,8 +62,10 @@ Relaciones (1 → *): `dim_organismo`, `dim_region`, `dim_estado` → `fact_lici
 `fact_licitacion[licitacion_id]` → `fact_item` y `fact_oferta`; `dim_unspsc[unspsc]` → `fact_item[unspsc]`;
 `dim_proveedor` → `fact_oferta[proveedor_id]` (y `fact_item[proveedor_adjudicado_id]`, inactiva).
 
-**Privacidad**: no se publica RUT; los proveedores que son personas naturales (RUT < 50.000.000) salen como
-"Persona natural N".
+**Proveedores**: el RUT no se publica. Los nombres de proveedores, incluidas las personas naturales
+(RUT < 50.000.000, columna `tipo_proveedor`), son información pública de Mercado Público y se muestran tal cual,
+en formato de nombre propio. `PUBLICAR_NOMBRES_PERSONAS = False` en `pipeline/build.py` los vuelve a enmascarar como
+"Persona natural N" (hace falta un backfill completo, porque las rebanadas guardan el nombre original).
 
 ## Cómo correrlo
 
