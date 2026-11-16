@@ -1,17 +1,17 @@
-﻿region_id,region,orden_norte_sur
-1,Arica y Parinacota,1
-2,Tarapacá,2
-3,Antofagasta,3
-4,Atacama,4
-5,Coquimbo,5
-6,Valparaíso,6
-7,Metropolitana,7
-8,O'Higgins,8
-9,Maule,9
-10,Ñuble,10
-11,Biobío,11
-12,La Araucanía,12
-13,Los Ríos,13
-14,Los Lagos,14
-15,Aysén,15
-16,Magallanes,16
+﻿region_id,region,orden_norte_sur,capital,lat,lon
+1,Arica y Parinacota,1,Arica,-18.4783,-70.3126
+2,Tarapacá,2,Iquique,-20.2307,-70.1357
+3,Antofagasta,3,Antofagasta,-23.6509,-70.3975
+4,Atacama,4,Copiapó,-27.3668,-70.3323
+5,Coquimbo,5,La Serena,-29.9027,-71.252
+6,Valparaíso,6,Valparaíso,-33.0472,-71.6127
+7,Metropolitana,7,Santiago,-33.4489,-70.6693
+8,O'Higgins,8,Rancagua,-34.1708,-70.7444
+9,Maule,9,Talca,-35.4264,-71.6554
+10,Ñuble,10,Chillán,-36.6063,-72.1034
+11,Biobío,11,Concepción,-36.827,-73.0503
+12,La Araucanía,12,Temuco,-38.7359,-72.5904
+13,Los Ríos,13,Valdivia,-39.8142,-73.2459
+14,Los Lagos,14,Puerto Montt,-41.4693,-72.9424
+15,Aysén,15,Coyhaique,-45.5712,-72.0685
+16,Magallanes,16,Punta Arenas,-53.1638,-70.9171

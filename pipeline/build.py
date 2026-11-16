@@ -76,6 +76,15 @@ CATEGORIA_CORTA = {
     "Compra administrativa de organismo del sector": "Administrativa",
 }
 
+CAPITALES = {  # region_id: (capital regional, lat, lon)
+    1: ("Arica", -18.4783, -70.3126), 2: ("Iquique", -20.2307, -70.1357), 3: ("Antofagasta", -23.6509, -70.3975),
+    4: ("Copiapó", -27.3668, -70.3323), 5: ("La Serena", -29.9027, -71.2520), 6: ("Valparaíso", -33.0472, -71.6127),
+    7: ("Santiago", -33.4489, -70.6693), 8: ("Rancagua", -34.1708, -70.7444), 9: ("Talca", -35.4264, -71.6554),
+    10: ("Chillán", -36.6063, -72.1034), 11: ("Concepción", -36.8270, -73.0503), 12: ("Temuco", -38.7359, -72.5904),
+    13: ("Valdivia", -39.8142, -73.2459), 14: ("Puerto Montt", -41.4693, -72.9424), 15: ("Coyhaique", -45.5712, -72.0685),
+    16: ("Punta Arenas", -53.1638, -70.9171),
+}
+
 REGIONES = [  # id, nombre corto, fragmento normalizado que lo identifica
     (1, "Arica y Parinacota", "ARICA"), (2, "Tarapacá", "TARAPACA"), (3, "Antofagasta", "ANTOFAGASTA"),
     (4, "Atacama", "ATACAMA"), (5, "Coquimbo", "COQUIMBO"), (6, "Valparaíso", "VALPARAISO"),
@@ -307,6 +316,9 @@ def construir_modelo(df):
     # --- dim_region
     dim_region = pd.DataFrame([(i, n) for i, n, _ in REGIONES], columns=["region_id", "region"])
     dim_region["orden_norte_sur"] = dim_region["region_id"]
+    dim_region["capital"] = dim_region["region_id"].map({k: v[0] for k, v in CAPITALES.items()})
+    dim_region["lat"] = dim_region["region_id"].map({k: v[1] for k, v in CAPITALES.items()})   # capital regional: punto del mapa
+    dim_region["lon"] = dim_region["region_id"].map({k: v[2] for k, v in CAPITALES.items()})
 
     # --- dim_organismo
     org = (df.sort_values("FechaPublicacion").groupby("CodigoOrganismo")

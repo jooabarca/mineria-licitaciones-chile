@@ -37,7 +37,10 @@ let
     ChangedTypes = Table.TransformColumnTypes(RenamedFirstColumn, {
         {"region_id", Int64.Type},
         {"region", type text},
-        {"orden_norte_sur", Int64.Type}
+        {"orden_norte_sur", Int64.Type},
+        {"capital", type text},
+        {"lat", type number},
+        {"lon", type number}
     }, "en-US")
 in
     ChangedTypes
