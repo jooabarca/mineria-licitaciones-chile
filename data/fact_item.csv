@@ -11033,7 +11033,7 @@
 9720012,43734502,24101715,Cinta transportadora,4.0,2,27842,1664.0
 9721083,43736964,25131705,Aviones objetivo o de reconocimiento,1.0,2,1399592,58205180.0
 9721154,43737609,72101607,Instalación o reparación de paredes,1.0,4,1352991,21099414.0
-9721234,43738214,43211501,Servidores,1.0,1,,
+9721234,43738214,43211501,Servidores,1.0,1,62706,6676250.0
 9721363,43738753,72131702,Construcción de obras civiles,1.0,7,,
 9721617,43739904,76111501,Servicios de limpieza de edificios,1.0,2,1619725,18000000.0
 9722402,43743226,26111711,Baterías de litio,1.0,10,,
@@ -11089,6 +11089,7 @@
 9725485,43758208,55101524,Libros de referencias para bibliotecas,1.0,1,,
 9725841,43758428,20101710,Maquinaria de pulverización,1.0,1,,
 9726015,43760042,24111810,Tanques de almacenamiento de agua,1.0,3,,
+9726274,43760025,70111703,Servicios de sembradío o mantenimiento de jardines,1.0,3,,
 9726470,43760822,20111601,Maquinaria de perforación o excavación,1.0,1,,
 9728133,43769534,20111601,Maquinaria de perforación o excavación,1.0,1,,
 9728146,43769581,41113642,Comprobador de circuitos,2.0,2,1573047,165500.0
@@ -11106,3 +11107,15 @@
 9728146,43769593,27111515,Taladro de mano o empuje,1.0,3,1573047,71470.0
 9728146,43769594,24101629,Accesorios o suministros de elevador de horquilla o transportador vertical,1.0,3,1573047,28050.0
 9728517,43771645,52161518,Receptores GPS,1.0,8,,
+9728575,43771922,77121503,Servicios de protección de la contaminación del aire,30.0,2,,
+9728575,43771923,46182005,Máscaras o filtros de respirador o accesorios,30.0,3,,
+9728575,43771924,40161507,Membranas de filtro,30.0,3,,
+9728575,43771925,23151806,Filtros o ultrafiltros farmacéuticos,30.0,3,,
+9728575,43771926,41113637,Medidores de voltaje o corriente,30.0,2,,
+9728575,43771927,42294512,Protectores oculares o sus accesorios,30.0,3,,
+9728575,43771928,31211903,Equipo para protección,30.0,2,,
+9728575,43771929,46181504,Guantes protectores,30.0,3,,
+9728575,43771930,39111702,Lámparas portátiles,30.0,3,,
+9728575,43771931,39111702,Lámparas portátiles,30.0,3,,
+9728575,43771932,44103103,Tóner,40.0,2,,
+9728575,43771933,24112403,Cinturón para herramientas,30.0,2,,
