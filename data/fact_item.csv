@@ -11036,16 +11036,17 @@
 9721234,43738214,43211501,Servidores,1.0,1,62706,6676250.0
 9721363,43738753,72131702,Construcción de obras civiles,1.0,7,,
 9721617,43739904,76111501,Servicios de limpieza de edificios,1.0,2,1619725,18000000.0
-9722402,43743226,26111711,Baterías de litio,1.0,10,,
+9722402,43743226,26111711,Baterías de litio,1.0,10,1321253,25160000.0
 9723436,43748402,20102306,Vehículos de plataforma elevada o ascensores pantográficos,1.0,1,,
 9723890,43750606,41103905,Centrifugadoras de suelo,2.0,6,,
 9723890,43750607,20101712,Amoladores de tierra,2.0,4,,
 9724036,43751488,71101501,Desarrollo de minería,1.0,1,,
 9724790,43754513,84131501,Seguros de edificios o de su contenido,18.0,3,,
 9724790,43754514,84131506,Servicios de reaseguros,18.0,3,,
-9724825,43754734,72101601,Instalación o reparación de techos,1.0,8,,
+9724825,43754734,72101601,Instalación o reparación de techos,1.0,8,1502843,2731713.0
+9725042,43755566,92101501,Servicios de vigilancia,1.0,1,,
 9725255,43756100,23153502,Reparación de zona de pintura,1.0,8,1904982,21336500.0
-9725454,43756869,72101607,Instalación o reparación de paredes,1.0,3,,
+9725454,43756869,72101607,Instalación o reparación de paredes,1.0,3,1945832,24000001.0
 9725485,43757709,55101524,Libros de referencias para bibliotecas,1.0,5,,
 9725485,43757711,55101524,Libros de referencias para bibliotecas,1.0,5,,
 9725485,43757714,55101524,Libros de referencias para bibliotecas,1.0,6,,
@@ -11119,3 +11120,7 @@
 9728575,43771931,39111702,Lámparas portátiles,30.0,3,,
 9728575,43771932,44103103,Tóner,40.0,2,,
 9728575,43771933,24112403,Cinturón para herramientas,30.0,2,,
+9728790,43772851,25172504,Neumáticos para camionetas o automóviles,118.0,5,,
+9728790,43772852,25172504,Neumáticos para camionetas o automóviles,73.0,5,,
+9730143,43784634,78101801,Servicios de transporte local en camión,1.0,2,,
+9730143,43784656,20111601,Maquinaria de perforación o excavación,1.0,2,,
