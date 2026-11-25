@@ -10788,9 +10788,9 @@
 9710785,43689580,24101715,Cinta transportadora,1.0,1,27842,1789000.0
 9710785,43689585,24101715,Cinta transportadora,4.0,1,27842,504000.0
 9710825,43689842,93142001,Servicios de planificación de desarrollo urbano,1.0,2,2049327,4000000.0
-9711443,43693104,20101805,Piezas de recambio de sistemas mecanizados de soporte en tierra o accesorios,1.0,2,,
-9711443,43693105,20101805,Piezas de recambio de sistemas mecanizados de soporte en tierra o accesorios,1.0,5,,
-9711443,43693106,20101805,Piezas de recambio de sistemas mecanizados de soporte en tierra o accesorios,1.0,2,,
+9711443,43693104,20101805,Piezas de recambio de sistemas mecanizados de soporte en tierra o accesorios,1.0,2,26778,8975313.0
+9711443,43693105,20101805,Piezas de recambio de sistemas mecanizados de soporte en tierra o accesorios,1.0,5,34999,1124712.0
+9711443,43693106,20101805,Piezas de recambio de sistemas mecanizados de soporte en tierra o accesorios,1.0,2,2112020,1680000.0
 9711631,43694599,81111812,Mantenimiento y soporte de hardware,2.0,13,1704561,6720662.8
 9711631,43694600,43231512,Software de gestión de licencias,1.0,13,1704561,21619693.0
 9711631,43694601,43232401,Programas de gestión de configuración,1.0,13,1704561,7366857.0
@@ -10815,7 +10815,7 @@
 9714208,43707628,20111601,Maquinaria de perforación o excavación,1.0,5,1492561,6880672.0
 9714208,43722620,20111601,Maquinaria de perforación o excavación,1.0,4,88757,6157983.1666667
 9714208,43722621,24101510,Camión volcador,1.0,3,88757,4000000.0
-9715271,43712059,20102305,Vehículos de servicio,3.0,10,,
+9715271,43712059,20102305,Vehículos de servicio,3.0,10,2057853,113443182.0
 9715665,43714023,76111501,Servicios de limpieza de edificios,24.0,5,1986503,12878400.0
 9715797,43714577,81101701,Ingeniería eléctrica,1.0,10,27226,20000000.0
 9715885,43714940,41106608,Vectores de fusión,1.0,1,46539,3250000.0
@@ -11116,6 +11116,7 @@
 9728146,43769592,27112126,Alicates planos,4.0,3,1573047,141360.0
 9728146,43769593,27111515,Taladro de mano o empuje,1.0,3,1573047,71470.0
 9728146,43769594,24101629,Accesorios o suministros de elevador de horquilla o transportador vertical,1.0,3,1573047,28050.0
+9728357,43770741,76111501,Servicios de limpieza de edificios,1.0,6,,
 9728517,43771645,52161518,Receptores GPS,1.0,8,,
 9728575,43771922,77121503,Servicios de protección de la contaminación del aire,30.0,2,,
 9728575,43771923,46182005,Máscaras o filtros de respirador o accesorios,30.0,3,,
@@ -11140,3 +11141,12 @@
 9731298,43786656,53101804,Abrigos y chaquetas para mujer,32.0,4,,
 9731298,43786657,53101802,Abrigos y chaquetas para hombre,11.0,5,,
 9731298,43786658,53101804,Abrigos y chaquetas para mujer,46.0,5,,
+9731813,43789706,20101711,Trituradoras de rocas,14.0,2,,
+9731813,43789717,20101711,Trituradoras de rocas,2.0,2,,
+9731813,43789719,20101711,Trituradoras de rocas,35.0,2,,
+9731813,43789721,20101711,Trituradoras de rocas,1.0,2,,
+9731813,43789722,20101711,Trituradoras de rocas,1.0,2,,
+9731813,43789723,20101711,Trituradoras de rocas,1.0,2,,
+9731813,43789725,20101711,Trituradoras de rocas,1.0,2,,
+9732419,43792290,43231512,Software de gestión de licencias,2.0,3,,
+9732419,43792291,43231512,Software de gestión de licencias,50.0,2,,
