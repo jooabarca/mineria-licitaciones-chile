@@ -11094,7 +11094,7 @@
 9725485,43758208,55101524,Libros de referencias para bibliotecas,1.0,1,,
 9725841,43758428,20101710,Maquinaria de pulverización,1.0,1,,
 9726015,43760042,24111810,Tanques de almacenamiento de agua,1.0,3,,
-9726274,43760025,70111703,Servicios de sembradío o mantenimiento de jardines,1.0,3,,
+9726274,43760025,70111703,Servicios de sembradío o mantenimiento de jardines,1.0,3,1712321,1600000.0
 9726470,43760822,20111601,Maquinaria de perforación o excavación,1.0,1,,
 9727251,43764854,43211710,Dispositivos de identificación de radiofrecuencias,12.0,1,,
 9727251,43764942,43211710,Dispositivos de identificación de radiofrecuencias,3.0,1,,
@@ -11150,7 +11150,9 @@
 9731813,43789722,20101711,Trituradoras de rocas,1.0,2,1083900,85000.0
 9731813,43789723,20101711,Trituradoras de rocas,1.0,2,1083900,35000.0
 9731813,43789725,20101711,Trituradoras de rocas,1.0,2,1083900,20000.0
+9731897,43789547,76111501,Servicios de limpieza de edificios,1.0,4,,
 9732419,43792290,43231512,Software de gestión de licencias,2.0,3,,
 9732419,43792291,43231512,Software de gestión de licencias,50.0,2,,
 9732859,43795177,20111601,Maquinaria de perforación o excavación,1.0,4,,
 9733198,43796628,46191608,Sistema de apagado de incendios,1.0,3,,
+9734036,43800798,20111504,Equipo de perforación de pozos de agua,1.0,1,,
